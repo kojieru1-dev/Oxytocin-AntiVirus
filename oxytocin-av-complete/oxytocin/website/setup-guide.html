@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Oxytocin AV — Setup Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#060810;--card:#111827;--border:rgba(255,255,255,0.08);--accent:#00d4aa;--text:#f0f4ff;--muted:#8892a4;--radius:12px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:2rem 1rem;}
+.wrap{max-width:760px;margin:0 auto;}
+h1{font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;margin-bottom:0.5rem;letter-spacing:-0.02em;}
+.sub{color:var(--muted);margin-bottom:3rem;}
+h2{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;margin:2.5rem 0 1rem;display:flex;align-items:center;gap:10px;}
+.step-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:1rem;}
+.step-card p{color:var(--muted);font-size:0.95rem;margin-bottom:0.75rem;}
+pre{background:#0a0e17;border:1px solid var(--border);border-radius:8px;padding:1rem 1.25rem;overflow-x:auto;margin:0.5rem 0;}
+code{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--accent);}
+.badge{display:inline-block;background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.25);color:var(--accent);padding:0.2rem 0.75rem;border-radius:99px;font-size:0.75rem;font-weight:500;margin-left:8px;}
+.warn{background:rgba(255,200,0,0.07);border:1px solid rgba(255,200,0,0.2);border-radius:8px;padding:1rem;color:#f0c040;font-size:0.88rem;margin:0.75rem 0;}
+.done{background:rgba(0,212,170,0.07);border:1px solid rgba(0,212,170,0.2);border-radius:8px;padding:1rem;color:var(--accent);font-size:0.88rem;margin:0.75rem 0;}
+a{color:var(--accent);}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p style="color:var(--muted);margin-bottom:1.5rem;font-size:0.85rem;">← <a href="index.html">Back to website</a></p>
+<h1>🛡️ Oxytocin AV Setup Guide</h1>
+<p class="sub">Follow these steps to deploy your website, set up PayPal payments, and publish your app. No coding experience required.</p>
+
+<!-- STEP 1 -->
+<h2>Step 1 — Upload to GitHub <span class="badge">5 min</span></h2>
+<div class="step-card">
+  <p>1. Go to <a href="https://github.com" target="_blank">github.com</a> and create a free account if you don't have one.</p>
+  <p>2. Click <strong>New repository</strong>. Name it <code>oxytocin-av</code>. Set it to <strong>Public</strong>. Click <strong>Create repository</strong>.</p>
+  <p>3. Upload all your files by clicking <strong>uploading an existing file</strong> on the repo page. Upload everything from the zip you downloaded.</p>
+  <p>4. Click <strong>Commit changes</strong>.</p>
+  <div class="done">✓ Your code is now on GitHub!</div>
+</div>
+
+<!-- STEP 2 -->
+<h2>Step 2 — Deploy website on Netlify <span class="badge">3 min</span></h2>
+<div class="step-card">
+  <p>1. Go to <a href="https://netlify.com" target="_blank">netlify.com</a> → Sign up free with GitHub.</p>
+  <p>2. Click <strong>Add new site → Import an existing project</strong>.</p>
+  <p>3. Choose <strong>GitHub</strong> → Select your <code>oxytocin-av</code> repo.</p>
+  <p>4. Set <strong>Publish directory</strong> to: <code>website</code></p>
+  <p>5. Click <strong>Deploy site</strong>.</p>
+  <div class="done">✓ Your website is live at <strong>something.netlify.app</strong> — copy your URL!</div>
+  <div class="warn">⚠ Want a custom domain like oxytocinav.com? Buy one on Namecheap (~$10/yr) then add it in Netlify → Domain settings.</div>
+</div>
+
+<!-- STEP 3 -->
+<h2>Step 3 — Set up PayPal payments <span class="badge">10 min</span></h2>
+<div class="step-card">
+  <p><strong>A. Get your PayPal Client ID:</strong></p>
+  <p>1. Go to <a href="https://developer.paypal.com" target="_blank">developer.paypal.com</a> → Log in with your PayPal account.</p>
+  <p>2. Click <strong>Apps & Credentials</strong> → <strong>Create App</strong>.</p>
+  <p>3. Name it <code>OxytocinAV</code> → Click Create.</p>
+  <p>4. Copy your <strong>Client ID</strong>.</p>
+
+  <p style="margin-top:1rem;"><strong>B. Create subscription plans:</strong></p>
+  <p>1. Go to <a href="https://www.paypal.com/billing/plans" target="_blank">paypal.com/billing/plans</a> → <strong>Create Plan</strong>.</p>
+  <p>2. Create <strong>Pro plan</strong>: $4.99/month, name "Oxytocin AV Pro".</p>
+  <p>3. Create <strong>Business plan</strong>: $9.99/month, name "Oxytocin AV Business".</p>
+  <p>4. Copy both <strong>Plan IDs</strong> (they look like <code>P-12ABC345...</code>).</p>
+
+  <p style="margin-top:1rem;"><strong>C. Update your website file:</strong></p>
+  <p>Open <code>website/index.html</code> and replace these 3 placeholders:</p>
+  <pre><code>YOUR_CLIENT_ID_HERE   → paste your PayPal Client ID
+plan_PRO_ID_HERE      → paste your Pro plan ID  
+plan_BIZ_ID_HERE      → paste your Business plan ID</code></pre>
+  <p>Save the file and re-upload to GitHub. Netlify will auto-redeploy in ~30 seconds.</p>
+  <div class="done">✓ PayPal payment buttons are now live on your site!</div>
+</div>
+
+<!-- STEP 4 -->
+<h2>Step 4 — Publish app for download <span class="badge">15 min</span></h2>
+<div class="step-card">
+  <p>The easiest way to host your app downloads is GitHub Releases.</p>
+  <p>1. On your GitHub repo, click <strong>Releases</strong> → <strong>Draft a new release</strong>.</p>
+  <p>2. Tag it <code>v1.0</code>, title it <strong>Oxytocin AV v1.0</strong>.</p>
+  <p>3. Drag and drop your installer files (the .exe, .dmg, .deb) into the release.</p>
+  <p>4. Click <strong>Publish release</strong>.</p>
+  <p>5. Copy each file's download URL (right-click → Copy link).</p>
+  <p>6. Open <code>website/index.html</code>, find the <code>downloadApp</code> function, uncomment the last line and paste your URLs:</p>
+  <pre><code>windows: 'https://github.com/YOUR_USER/oxytocin-av/releases/download/v1.0/OxytocinAV-Setup-1.0-win64.exe'
+mac:     'https://github.com/YOUR_USER/oxytocin-av/releases/download/v1.0/OxytocinAV-1.0.dmg'
+linux:   'https://github.com/YOUR_USER/oxytocin-av/releases/download/v1.0/oxytocin-av_1.0_amd64.deb'</code></pre>
+  <div class="done">✓ Download buttons on your site now serve real files!</div>
+</div>
+
+<!-- STEP 5 -->
+<h2>Step 5 — Build installers <span class="badge">Optional</span></h2>
+<div class="step-card">
+  <p>To create a real .exe / .dmg / .deb from the Python app:</p>
+  <pre><code># Install PyInstaller
+pip install pyinstaller
+
+# Windows — creates dist/OxytocinAV.exe
+pyinstaller --onefile --name=OxytocinAV app/oxytocin_av.py
+
+# macOS — creates dist/OxytocinAV.app
+pyinstaller --onefile --windowed --name=OxytocinAV app/oxytocin_av.py
+
+# Linux — creates dist/oxytocin-av
+pyinstaller --onefile --name=oxytocin-av app/oxytocin_av.py</code></pre>
+  <div class="warn">⚠ Run PyInstaller on each OS to build that OS's installer. You can't build a Windows .exe on macOS.</div>
+</div>
+
+<!-- STEP 6 -->
+<h2>Step 6 — Install via pip <span class="badge">Easiest</span></h2>
+<div class="step-card">
+  <p>Users can install instantly with pip (no installer needed):</p>
+  <pre><code>pip install oxytocin-av</code></pre>
+  <p>To publish to PyPI so this works:</p>
+  <pre><code>pip install twine build
+cd app/
+python -m build
+twine upload dist/*</code></pre>
+  <p>You'll need a free account at <a href="https://pypi.org" target="_blank">pypi.org</a>.</p>
+  <div class="done">✓ After publishing, anyone in the world can install with one command!</div>
+</div>
+
+<div style="margin-top:3rem;padding:2rem;background:#0a0e17;border:1px solid var(--border);border-radius:var(--radius);text-align:center;">
+  <p style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:0.5rem;">🎉 You're all set!</p>
+  <p style="color:var(--muted);font-size:0.9rem;">Your antivirus website is live, payments work, and users can download your app.</p>
+</div>
+</div>
+</body>
+</html>
